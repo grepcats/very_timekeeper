@@ -9,7 +9,11 @@ namespace VeryTimekeeper.ViewModels
     public class RegisterViewModel
     {
         [Required]
-        [EmailAddress]
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
+
+        [Required]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
         [Required]

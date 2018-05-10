@@ -4,11 +4,16 @@
     ViewData["Title"] = "Tasks";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<script type="text/javascript">
+    var allTasks = @Html.Raw(Json.Serialize(Model));
+</script>
 <div>
     @Html.ActionLink("Create new task", "Create")
 </div>
 
 <hr/>
+<button onclick="startTimer()">Click 2 start</button>
 @foreach(var task in Model)
 {
     <div class="single-task">

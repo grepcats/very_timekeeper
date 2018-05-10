@@ -1,4 +1,4 @@
-@inject Microsoft.ApplicationInsights.AspNetCore.JavaScriptSnippet JavaScriptSnippet
+﻿@inject Microsoft.ApplicationInsights.AspNetCore.JavaScriptSnippet JavaScriptSnippet
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,8 +33,31 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                   
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        @*<li>
+                            <a asp-area="" asp-controller="Account" asp-action="Login">Log In</a>
+                        </li>*@
+                    }
+                    else
+                    {
+
+                        @*<li>
+                            @using (Html.BeginForm("LogOff", "Account"))
+                            {
+                                <input type="submit" class="btn btn-default logout-button" value="Log out" />
+
+                            }
+
+                        </li>*@
+                    }
+
+                    <li>
+                        <a asp-area="" asp-controller="Account" asp-action="Register">Sign Up</a>
+                    </li>
                 </ul>
             </div>
         </div>

@@ -23,7 +23,8 @@ namespace VeryTimekeeper.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            List<Models.Task> model = _db.Tasks.ToList();
+            return View(model);
         }
 
         public IActionResult Create()
@@ -31,7 +32,8 @@ namespace VeryTimekeeper.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Create(VeryTimekeeper.Models.Task task)
+        [HttpPost]
+        public async Task<IActionResult> Create(Models.Task task)
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             task.User = await _userManager.FindByIdAsync(userId);

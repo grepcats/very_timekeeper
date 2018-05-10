@@ -1,0 +1,19 @@
+﻿@model VeryTimekeeper.Models.Task
+@{
+    ViewData["Title"] = "Task - Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Add a New Task</h2>
+<hr />
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        @Html.LabelFor(model => model.Content)
+        @Html.TextBoxFor(model => model.Content, new { @class = "form-control" })
+    </div>
+
+    <input type="submit" value="Create" class="btn btn-default" />
+
+}

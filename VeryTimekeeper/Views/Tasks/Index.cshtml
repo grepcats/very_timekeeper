@@ -1,0 +1,18 @@
+﻿@model IEnumerable<VeryTimekeeper.Models.Task>
+
+@{
+    ViewData["Title"] = "Tasks";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+    @Html.ActionLink("Create new task", "Create")
+</div>
+
+<hr/>
+@foreach(var task in Model)
+{
+    <div class="single-task">
+        <p>@Html.DisplayFor(modelTask => task.Content)</p>
+    </div>
+
+}

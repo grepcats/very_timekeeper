@@ -6,8 +6,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using VeryTimekeeper.Models;
-
-//Add this
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace VeryTimekeeper
@@ -26,24 +24,24 @@ namespace VeryTimekeeper
         {
             services.AddMvc();
 
-        //    services.AddEntityFrameworkMySql()
-        //      .AddDbContext<ApplicationDbContext>(options =>
-        //          options.UseMySql(Configuration["ConnectionStrings:DefaultConnection"])
-        //      );
+            services.AddEntityFrameworkMySql()
+              .AddDbContext<ApplicationDbContext>(options =>
+                  options.UseMySql(Configuration["ConnectionStrings:DefaultConnection"])
+              );
 
-        //    services.AddIdentity<ApplicationUser, IdentityRole>()
-        //      .AddEntityFrameworkStores<ApplicationDbContext>()
-        //      .AddDefaultTokenProviders();
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+              .AddEntityFrameworkStores<ApplicationDbContext>()
+              .AddDefaultTokenProviders();
 
 
-            
-        //    services.AddIdentity<ApplicationUser, IdentityRole>(options =>
-        //    {
-        //        options.Password.RequireUppercase = false;
-        //        options.Password.RequireNonAlphanumeric = false;
-        //        options.Password.RequiredLength = 0;
-        //        options.Password.RequireDigit = false;
-        //    });
+
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            {
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 0;
+                options.Password.RequireDigit = false;
+            });
         }
 
         public void Configure(IApplicationBuilder app)

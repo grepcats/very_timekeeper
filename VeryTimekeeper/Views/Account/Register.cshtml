@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using VeryTimekeeper.ViewModels
+
+@model RegisterViewModel
+
+<hr />
+<h2 class="text-center">Please register for your Very Timekeeper account to save your tasks!</h2>
+<div class="form-container">
+    <div class="register-form">
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+        {
+
+            <div class="form-group">
+                @Html.LabelFor(user => user.Email)
+                @Html.TextBoxFor(user => user.Email, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(user => user.Password)
+                @Html.PasswordFor(user => user.Password, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(user => user.ConfirmPassword)
+                @Html.PasswordFor(user => user.ConfirmPassword, new { @class = "form-control" })
+            </div>
+            <button type="submit" value="Register">Sign up</button>
+        }
+    </div>
+</div>

@@ -34,6 +34,7 @@ namespace VeryTimekeeper.Controllers
         public async Task<IActionResult> Create(VeryTimekeeper.Models.Task task)
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            task.User = await _userManager.FindByIdAsync(userId);
             _db.Tasks.Add(task);
             await _db.SaveChangesAsync();
             return RedirectToAction("Index");

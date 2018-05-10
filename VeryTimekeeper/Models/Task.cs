@@ -17,5 +17,6 @@ namespace VeryTimekeeper.Models
         public string timeRemaining { get; set; }
         public DateTime timeToStart { get; set; }
         public DateTime timeToFinish { get; set; }
+        public virtual ApplicationUser User { get; set; }
     }
 }

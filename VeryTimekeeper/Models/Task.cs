@@ -14,7 +14,7 @@ namespace VeryTimekeeper.Models
         public int TaskId { get; set; }
         public string Content { get; set; }
         public string timeTotal { get; set; }
-        public string timeRemaining { get; set; }
+        public int timeRemaining { get; set; }
         public DateTime timeToStart { get; set; }
         public DateTime timeToFinish { get; set; }
         public virtual ApplicationUser User { get; set; }

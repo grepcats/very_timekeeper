@@ -27,7 +27,9 @@ function startTimer() {
             }
         }, 1000);
     })
- 
-
-
 }
+
+//settimer (on model)
+//starttimer
+//movetonextitem
+//

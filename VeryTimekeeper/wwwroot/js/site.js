@@ -4,7 +4,7 @@ function startTimer() {
     console.log(allTasks);
 
     allTasks.forEach(function (task) {
-        var seconds_left = 3601;
+        var seconds_left = task.timeRemaining;
         
 
         var interval = setInterval(function () {

@@ -7,15 +7,20 @@
 
 <script type="text/javascript">
     var allTasks = @Html.Raw(Json.Serialize(Model));
+    
 </script>
 <div>
     @Html.ActionLink("Create new task", "Create")
 </div>
 
-<hr/>
-<button class="start">Test</button>
+<hr />
+<button class="start" data-request-url="@Url.Action("UpdateTaskTime", "Tasks")">Test</button>
 <button onclick="startTimer()">Click 2 start</button>
-@foreach(var task in Model)
+
+<div id="all-tasks">
+
+</div>
+@foreach (var task in Model)
 {
     <div class="single-task">
         <p class="task-title">@Html.DisplayFor(modelTask => task.Content)</p>
@@ -23,3 +28,5 @@
     </div>
 
 }
+
+<div id="result"></div>

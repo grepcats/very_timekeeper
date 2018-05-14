@@ -11,12 +11,50 @@
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        @*<script type="text/javascript">
+            $(document).ready(function () {
+                $('.start').click(function (event) {
+                    event.preventDefault();
+                    $.ajax({
+                        url: '@Url.Action("UpdateTaskTime", "Tasks")',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: { 'id': 1 },
+                        //data: { 'TaskId' : task.taskId, 'Content' : task.content, 'TimeRemaining' : task.timeRemaining },
+                        success: function (result) {
+                            $('#result').html("it worked");
+                        }
+                    });
+                });
+            });
+
+        </script>*@
     </environment>
     <environment names="Staging,Production">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('.start').click(function (event) {
+                    event.preventDefault();
+                    $.ajax({
+                        url: '@Url.Action("UpdateTaskTime", "Tasks")',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: { 'id': task.taskId },
+                        //data: { 'TaskId' : task.taskId, 'Content' : task.content, 'TimeRemaining' : task.timeRemaining },
+                        success: function (result) {
+                            $('#result').html("it worked");
+                        }
+                    });
+                });
+            });
+
+        </script>
     </environment>
     @Html.Raw(JavaScriptSnippet.FullScript)
 </head>

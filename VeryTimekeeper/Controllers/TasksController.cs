@@ -24,7 +24,7 @@ namespace VeryTimekeeper.Controllers
 
         public IActionResult Index()
         {
-            List<Models.Task> model = _db.Tasks.ToList();
+            List<Models.Task> model = _db.Tasks.OrderBy(x => x.timeToFinish).ToList();
             return View(model);
         }
 
@@ -76,22 +76,25 @@ namespace VeryTimekeeper.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdateTaskTime(int id)
+        public IActionResult UpdateTaskTime(int incomingId, string incomingContent, int incomingTimeRemaining)
         {
-            var thisTask = _db.Tasks.FirstOrDefault(Tasks => Tasks.TaskId == id);
-            thisTask.timeRemaining = 0;
+            var thisTask = _db.Tasks.FirstOrDefault(Tasks => Tasks.TaskId == incomingId);
+            thisTask.timeRemaining = incomingTimeRemaining;
+            thisTask.timeToFinish = DateTime.Now;
             _db.Entry(thisTask).State = EntityState.Modified;
             _db.SaveChanges();
-            //this isn't how i want to list model - i need to have some kind of sort
+            
             List<Models.Task> model = _db.Tasks.ToList();
             if (model.Count > 0)
             {
-                //Models.Task first = model.RemoveAt(0);
-               // model.Insert((model.Count - 1), first);
+                Models.Task first = model[0];
+                model.RemoveAt(0);
+                model.Insert((model.Count), first);
+               // model.Insert(0, new Models.Task { Content = "hello guys", TaskId = 3, timeRemaining = 33 });
             }
-            
 
-            return View("Index", model);
+
+            return RedirectToAction("Index");
         }
     }
 }

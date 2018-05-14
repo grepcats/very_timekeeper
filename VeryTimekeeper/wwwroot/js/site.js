@@ -29,22 +29,22 @@ function startTimer() {
         if (seconds_left <= 0) {
             document.getElementById('timer' + task.taskId).innerHTML = 'task done';
             task.timeRemaining = 0;
-            console.log(task);
-                $('.start').click(function (event) {
-                    event.preventDefault();
-                    $.ajax({
-                        url: 'Tasks/UpdateTaskTime/' + task.taskId,
-                        type: 'POST',
-                        dataType: 'json',
-                        data: { "id": task.taskId },
-                        success: function (result) {
-                            console.log("it worked");
-                        },
-                        fail: function (result) {
-                            console.log("nope");
-                        }
-                    });
+            console.log(task.content);
+            $('.start').click(function (event) {
+                console.log($(this).attr('data-request-url'));
+                event.preventDefault();
+                $.ajax({
+                    url: $(this).attr('data-request-url'),
+                    type: 'POST',
+                    dataType: 'json',
+                    //data: { 'id' : task.taskId },
+                    data: { 'incomingId' : task.taskId, 'incomingContent' : task.content, 'incomingTimeRemaining' : task.timeRemaining },
+                    success: function (result) {
+                        $('#result').html("it worked");
+                    }
                 });
+
+            });
            
             
             

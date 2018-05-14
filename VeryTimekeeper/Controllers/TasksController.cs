@@ -7,6 +7,7 @@ using VeryTimekeeper.ViewModels;
 using VeryTimekeeper.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
+using Microsoft.EntityFrameworkCore;
 
 namespace VeryTimekeeper.Controllers
 {
@@ -72,6 +73,25 @@ namespace VeryTimekeeper.Controllers
             _db.Tasks.Add(task);
             await _db.SaveChangesAsync();
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult UpdateTaskTime(int id)
+        {
+            var thisTask = _db.Tasks.FirstOrDefault(Tasks => Tasks.TaskId == id);
+            thisTask.timeRemaining = 0;
+            _db.Entry(thisTask).State = EntityState.Modified;
+            _db.SaveChanges();
+            //this isn't how i want to list model - i need to have some kind of sort
+            List<Models.Task> model = _db.Tasks.ToList();
+            if (model.Count > 0)
+            {
+                //Models.Task first = model.RemoveAt(0);
+               // model.Insert((model.Count - 1), first);
+            }
+            
+
+            return View("Index", model);
         }
     }
 }

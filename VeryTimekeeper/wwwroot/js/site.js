@@ -28,26 +28,36 @@ function startTimer() {
 
         if (seconds_left <= 0) {
             document.getElementById('timer' + task.taskId).innerHTML = 'task done';
-            let completeItem = allTasks.shift();
+            task.timeRemaining = 0;
+            console.log(task);
+                $('.start').click(function (event) {
+                    event.preventDefault();
+                    $.ajax({
+                        url: 'Tasks/UpdateTaskTime/' + task.taskId,
+                        type: 'POST',
+                        dataType: 'json',
+                        data: { "id": task.taskId },
+                        success: function (result) {
+                            console.log("it worked");
+                        },
+                        fail: function (result) {
+                            console.log("nope");
+                        }
+                    });
+                });
+           
+            
+            
+            
+            
+            //let completeItem = allTasks.shift();
             clearInterval(interval);
-            document.title = 'task done';
-            if (allTasks.length > 0) {
-                startTimer();
-            }
+            //document.title = 'task done';
+
+            //if (allTasks.length > 0) {
+            //    startTimer();
+            //}
             
         }
     }, 1000);
 }
-
-function moveToNext() {
-
-}
-        
-        
-
-       
-
-//settimer (on model)
-//starttimer
-//movetonextitem
-//

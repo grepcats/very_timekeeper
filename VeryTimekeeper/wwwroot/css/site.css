@@ -25,6 +25,11 @@ textarea {
 .logout-button {
     margin-top: 15px;
 }
+
+.task-title {
+    font-weight: bold;
+    font-size: 1.25em;
+}
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
     /* Hide captions */

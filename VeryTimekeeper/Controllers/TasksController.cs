@@ -35,6 +35,12 @@ namespace VeryTimekeeper.Controllers
             return View();
         }
 
+        public IActionResult ListTasks(int[] taskIds)
+        {
+
+            return PartialView();
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create(Models.Task task)
         {

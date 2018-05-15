@@ -31,6 +31,9 @@ textarea {
     font-size: 1.25em;
 }
 
+.single-task:hover {
+    cursor: pointer;
+}
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
     /* Hide captions */

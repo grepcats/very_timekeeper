@@ -24,6 +24,7 @@
 <hr />
 <button class="start" data-request-url="@Url.Action("UpdateTaskTime", "Tasks")">Test</button>
 <button onclick="startTimer()">Click 2 start</button>
+<button class="reset" data-request-url="@Url.Action("ListTasks", "Tasks")" onclick="resetTasks()">Reset tasks</button>
 <div id="all-tasks">
 
 </div>

@@ -1,6 +1,4 @@
-﻿// Write your Javascript code.
-
-function startTimer() {
+﻿function startTimer() {
     let task = allTasks[0];
     let seconds_left = task.timeRemaining;
     var interval = setInterval(function () {
@@ -31,49 +29,40 @@ function startTimer() {
             task.timeRemaining = 0;
             console.log(task.content);
             $('.start').click(function (event) {
-                console.log($(this).attr('data-request-url'));
                 event.preventDefault();
+                console.log($(this).attr('data-request-url'));
+                
                 $.ajax({
                     url: $(this).attr('data-request-url'),
                     type: 'POST',
                     dataType: 'json',
                     //data: { 'id' : task.taskId },
-                    data: { 'incomingId' : task.taskId, 'incomingContent' : task.content, 'incomingTimeRemaining' : task.timeRemaining },
+                    data: { 'incomingId': task.taskId, 'incomingContent': task.content, 'incomingTimeRemaining': task.timeRemaining },
                     success: function (result) {
                         $('#result').html("it worked");
                     }
                 });
 
             });
-           
-            
-            
-            
-            
-            //let completeItem = allTasks.shift();
-            clearInterval(interval);
-            //document.title = 'task done';
 
-            //if (allTasks.length > 0) {
-            //    startTimer();
-            //}
-            
+            clearInterval(interval);
         }
     }, 1000);
 }
 
-function allowDrop(ev) {
-    ev.preventDefault();
+function resetTasks() {
+    var htmlTaskIds = $(".task-title").map(function () {
+        return this.id;
+    }).toArray();
+    console.log(htmlTaskIds);
+    console.log($(".reset").attr('data-request-url'))
+    $.ajax({
+        url: $(this).attr('data-request-url'),
+        type: 'POST',
+        dataType: 'json',
+        data: { 'taskIds': htmlTaskIds },
+        success: function (result) {
+            $('#test-tasks').html("result");
+        }
+    });
 }
-
-function drag(ev) {
-    ev.dataTransfer.setData("text", ev.target.id);
-}
-
-function drop(ev) {
-    ev.preventDefault();
-    var data = ev.dataTransfer.getData("text");
-    ev.target.appendChild(document.getElementById(data));
-}
-
-

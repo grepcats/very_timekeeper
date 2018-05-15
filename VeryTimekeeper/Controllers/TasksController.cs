@@ -38,14 +38,32 @@ namespace VeryTimekeeper.Controllers
         public IActionResult ListTasks(string taskIds)
         {
             List<string> fullTaskIds = taskIds.Split(',').ToList();
-            List<Models.Task> newTaskOrder = new List<Models.Task>();
-            foreach (string task in fullTaskIds)
+            var lastTask = new Models.Task();
+            for (int i = 0; i < fullTaskIds.Count; i++)
             {
-                int newTaskId = Int32.Parse(task.Remove(0, 5));
+                int newTaskId = Int32.Parse(fullTaskIds[i].Remove(0, 5));
+                
                 var thisTask = _db.Tasks.FirstOrDefault(Tasks => Tasks.TaskId == newTaskId);
-                newTaskOrder.Add(thisTask);
+                
+                if (i == 0)
+                {
+                    thisTask.timeToFinish = DateTime.Now.AddSeconds(thisTask.timeRemaining);
+                    lastTask = thisTask;
+                    _db.Entry(thisTask).State = EntityState.Modified;
+                    _db.SaveChanges();
+                }
+                else
+                {
+                    thisTask.timeToFinish = lastTask.timeToFinish.AddSeconds(thisTask.timeRemaining);
+                    lastTask = thisTask;
+                    _db.Entry(thisTask).State = EntityState.Modified;
+                    _db.SaveChanges();
+                }
+                
+
             }
-            return PartialView(newTaskOrder);
+            List<Models.Task> model = _db.Tasks.OrderBy(x => x.timeToFinish).ToList();
+            return PartialView(model);
         }
 
         [HttpPost]

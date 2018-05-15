@@ -13,7 +13,7 @@
         @foreach (var task in Model)
         {
             <li class="single-task ui-state-default" id="single-task@(task.TaskId)">
-                <p class="task-title" id="timer@(task.TaskId)">@Html.DisplayFor(modelTask => task.Content) @task.timeRemaining</p>
+                <p class="task-title" id="timer@(task.TaskId)">@Html.DisplayFor(modelTask => task.Content) @task.timeRemaining, @Html.DisplayFor(modelTask => task.timeToFinish)</p>
             </li>
 
         }

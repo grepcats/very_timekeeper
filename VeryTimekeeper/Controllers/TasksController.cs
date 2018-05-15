@@ -35,9 +35,15 @@ namespace VeryTimekeeper.Controllers
             return View();
         }
 
-        public IActionResult ListTasks(int[] taskIds)
+        public IActionResult ListTasks(string taskIds)
         {
-
+            List<string> fullTaskIds = taskIds.Split(',').ToList();
+            List<int> intIds = new List<int>();
+            foreach (string task in fullTaskIds)
+            {
+                string newTask = task.Remove(0, 5);
+                intIds.Add(Int32.Parse(newTask));
+            }
             return PartialView();
         }
 

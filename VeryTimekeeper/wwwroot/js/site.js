@@ -53,11 +53,11 @@
 function resetTasks() {
     var htmlTaskIds = $(".task-title").map(function () {
         return this.id;
-    }).toArray();
+    }).toArray().toString();
     console.log(htmlTaskIds);
     console.log($(".reset").attr('data-request-url'))
     $.ajax({
-        url: $(this).attr('data-request-url'),
+        url: $(".reset").attr('data-request-url'),
         type: 'POST',
         dataType: 'json',
         data: { 'taskIds': htmlTaskIds },

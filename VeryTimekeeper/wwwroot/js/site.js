@@ -1,5 +1,4 @@
-﻿// Write your Javascript code.
-
+﻿
 function startTimer() {
     let task = allTasks[0];
     let seconds_left = task.timeRemaining;

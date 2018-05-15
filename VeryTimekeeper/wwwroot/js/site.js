@@ -54,15 +54,16 @@ function resetTasks() {
     var htmlTaskIds = $(".task-title").map(function () {
         return this.id;
     }).toArray().toString();
-    console.log(htmlTaskIds);
-    console.log($(".reset").attr('data-request-url'))
+    //console.log(htmlTaskIds);
+    //console.log($(".reset").attr('data-request-url'))
     $.ajax({
         url: $(".reset").attr('data-request-url'),
-        type: 'POST',
-        dataType: 'json',
+        type: 'GET',
+        dataType: 'html',
         data: { 'taskIds': htmlTaskIds },
         success: function (result) {
-            $('#test-tasks').html("result");
+            console.log(result);
+            $('#all-tasks').html(result);
         }
     });
 }

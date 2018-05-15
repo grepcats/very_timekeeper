@@ -7,8 +7,16 @@
 
 <script type="text/javascript">
     var allTasks = @Html.Raw(Json.Serialize(Model));
-    
+
 </script>
+
+<script>
+    $(function () {
+        $("#sortable").sortable();
+        $("#sortable").disableSelection();
+    });
+</script>
+
 <div>
     @Html.ActionLink("Create new task", "Create")
 </div>
@@ -16,17 +24,26 @@
 <hr />
 <button class="start" data-request-url="@Url.Action("UpdateTaskTime", "Tasks")">Test</button>
 <button onclick="startTimer()">Click 2 start</button>
-
 <div id="all-tasks">
 
 </div>
-@foreach (var task in Model)
+@*@foreach (var task in Model)
 {
-    <div class="single-task">
+    <div class="single-task" id="single-task@(task.TaskId)">
         <p class="task-title">@Html.DisplayFor(modelTask => task.Content)</p>
         <p id="timer@(task.TaskId)">@task.timeRemaining</p>
     </div>
 
-}
+}*@
+
+<ul id="sortable" class="list-unstyled ui-sortable">
+    @foreach (var task in Model)
+    {
+        <li class="single-task ui-state-default" id="single-task@(task.TaskId)">
+            <p class="task-title" id="timer@(task.TaskId)">@Html.DisplayFor(modelTask => task.Content) @task.timeRemaining</p>
+        </li>
+
+    }
+</ul>
 
 <div id="result"></div>

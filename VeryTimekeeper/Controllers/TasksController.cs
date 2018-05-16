@@ -126,5 +126,11 @@ namespace VeryTimekeeper.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public IActionResult Update(int id)
+        {
+            var thisTask = _db.Tasks.FirstOrDefault(Tasks => Tasks.TaskId == id);
+            return View(thisTask);
+        }
     }
 }

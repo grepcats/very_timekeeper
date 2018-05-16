@@ -8,14 +8,16 @@
             
     </script>
 
-    <ul id="sortable" class="list-unstyled ui-sortable">
+    <ul id="sortable" class="list-unstyled ui-sortable task-list">
 
         @foreach (var task in Model)
-        {
-            <li class="single-task ui-state-default" id="single-task@(task.TaskId)">
-                <p class="task-title" id="timer@(task.TaskId)">@Html.DisplayFor(modelTask => task.Content) @task.timeRemaining, @Html.DisplayFor(modelTask => task.timeToFinish)</p>
-            </li>
+    {
+        <li class="single-task ui-state-default" id="single-task@(task.TaskId)">
+            <span class="task-title">@Html.DisplayFor(modelTask => task.Content)</span>
+            <span class="time-remaining" id="timer@(task.TaskId)">@Html.DisplayFor(modelTask => task.timeRemaining)</span>
+            <span class="time-complete">@Html.DisplayFor(modelTask => task.timeToFinish)</span>
+        </li>
 
-        }
+}
     </ul>
  

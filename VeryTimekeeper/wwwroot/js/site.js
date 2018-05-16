@@ -51,7 +51,7 @@ function startTimer() {
 }
 
 function resetTasks() {
-    var htmlTaskIds = $(".task-title").map(function () {
+    var htmlTaskIds = $(".single-task").map(function () {
         return this.id;
     }).toArray().toString();
     //console.log(htmlTaskIds);

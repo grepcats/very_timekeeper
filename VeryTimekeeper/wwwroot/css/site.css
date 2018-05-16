@@ -26,14 +26,35 @@ textarea {
     margin-top: 15px;
 }
 
+
+
+/* Tasks */
+.single-task:hover {
+    cursor: pointer;
+}
+
+.single-task {
+    background-color: pink;
+    padding: 15px;
+    margin-top: 5px;
+    border-radius: 15px;
+    border: 1px solid red;
+}
+
+.task-list {
+    display: inline-block;
+
+}
+
 .task-title {
     font-weight: bold;
     font-size: 1.25em;
 }
 
-.single-task:hover {
-    cursor: pointer;
+.time-remaining {
+
 }
+
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
     /* Hide captions */

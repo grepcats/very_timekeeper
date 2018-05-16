@@ -41,7 +41,7 @@ namespace VeryTimekeeper.Controllers
             var lastTask = new Models.Task();
             for (int i = 0; i < fullTaskIds.Count; i++)
             {
-                int newTaskId = Int32.Parse(fullTaskIds[i].Remove(0, 5));
+                int newTaskId = Int32.Parse(fullTaskIds[i].Remove(0, 11));
                 
                 var thisTask = _db.Tasks.FirstOrDefault(Tasks => Tasks.TaskId == newTaskId);
                 

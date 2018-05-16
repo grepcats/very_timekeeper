@@ -54,7 +54,7 @@ namespace VeryTimekeeper.Controllers
                 }
                 else
                 {
-                    thisTask.timeToFinish = lastTask.timeToFinish.AddSeconds(thisTask.timeRemaining);
+                    thisTask.timeToFinish = lastTask.timeToFinish.AddSeconds(lastTask.timeRemaining);
                     lastTask = thisTask;
                     _db.Entry(thisTask).State = EntityState.Modified;
                     _db.SaveChanges();

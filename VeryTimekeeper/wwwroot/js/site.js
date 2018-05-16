@@ -1,5 +1,6 @@
 function startTimer() {
     let task = allTasks[0];
+    let tasks = allTasks;
     let seconds_left = task.timeRemaining;
     var interval = setInterval(function () {
         let min = 0;
@@ -27,7 +28,7 @@ function startTimer() {
         if (seconds_left <= 0) {
             document.getElementById('timer' + task.taskId).innerHTML = 'task done';
             task.timeRemaining = 0;
-            console.log(task.content);
+            //console.log(task.content);
             $('.start').click(function (event) {
                 event.preventDefault();
                 console.log($(this).attr('data-request-url'));

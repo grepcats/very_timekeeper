@@ -10,6 +10,7 @@
 
         $("#sortable").disableSelection();
     });
+     var allTasks = @Html.Raw(Json.Serialize(Model));
 </script>
 
     <ul id="sortable" class="list-unstyled ui-sortable task-list">

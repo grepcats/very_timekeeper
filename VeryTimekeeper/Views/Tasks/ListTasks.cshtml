@@ -1,0 +1,21 @@
+﻿@model IEnumerable<VeryTimekeeper.Models.Task>
+
+    <script type="text/javascript">
+        $(function () {
+            $("#sortable").sortable();
+            $("#sortable").disableSelection();
+        });
+            
+    </script>
+
+    <ul id="sortable" class="list-unstyled ui-sortable">
+
+        @foreach (var task in Model)
+        {
+            <li class="single-task ui-state-default" id="single-task@(task.TaskId)">
+                <p class="task-title" id="timer@(task.TaskId)">@Html.DisplayFor(modelTask => task.Content) @task.timeRemaining, @Html.DisplayFor(modelTask => task.timeToFinish)</p>
+            </li>
+
+        }
+    </ul>
+ 

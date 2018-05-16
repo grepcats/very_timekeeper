@@ -18,5 +18,10 @@ namespace VeryTimekeeper.Models
         public DateTime timeToStart { get; set; }
         public DateTime timeToFinish { get; set; }
         public virtual ApplicationUser User { get; set; }
+
+        public static void ReorderTasks()
+        {
+            
+        }
     }
 }

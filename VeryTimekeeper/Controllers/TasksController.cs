@@ -35,6 +35,37 @@ namespace VeryTimekeeper.Controllers
             return View();
         }
 
+        public IActionResult ListTasks(string taskIds)
+        {
+            List<string> fullTaskIds = taskIds.Split(',').ToList();
+            var lastTask = new Models.Task();
+            for (int i = 0; i < fullTaskIds.Count; i++)
+            {
+                int newTaskId = Int32.Parse(fullTaskIds[i].Remove(0, 5));
+                
+                var thisTask = _db.Tasks.FirstOrDefault(Tasks => Tasks.TaskId == newTaskId);
+                
+                if (i == 0)
+                {
+                    thisTask.timeToFinish = DateTime.Now.AddSeconds(thisTask.timeRemaining);
+                    lastTask = thisTask;
+                    _db.Entry(thisTask).State = EntityState.Modified;
+                    _db.SaveChanges();
+                }
+                else
+                {
+                    thisTask.timeToFinish = lastTask.timeToFinish.AddSeconds(thisTask.timeRemaining);
+                    lastTask = thisTask;
+                    _db.Entry(thisTask).State = EntityState.Modified;
+                    _db.SaveChanges();
+                }
+                
+
+            }
+            List<Models.Task> model = _db.Tasks.OrderBy(x => x.timeToFinish).ToList();
+            return PartialView(model);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create(Models.Task task)
         {

@@ -36,7 +36,6 @@ function startTimer() {
                     url: $(this).attr('data-request-url'),
                     type: 'POST',
                     dataType: 'json',
-                    //data: { 'id' : task.taskId },
                     data: { 'incomingId': task.taskId, 'incomingContent': task.content, 'incomingTimeRemaining': task.timeRemaining },
                     success: function (result) {
                         $('#result').html("it worked");

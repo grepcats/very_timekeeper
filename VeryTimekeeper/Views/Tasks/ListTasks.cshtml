@@ -1,12 +1,16 @@
 ﻿@model IEnumerable<VeryTimekeeper.Models.Task>
 
-    <script type="text/javascript">
-        $(function () {
-            $("#sortable").sortable();
-            $("#sortable").disableSelection();
+<script>
+    $(function () {
+        $("#sortable").sortable({
+            update: function () {
+                resetTasks();
+            }
         });
-            
-    </script>
+
+        $("#sortable").disableSelection();
+    });
+</script>
 
     <ul id="sortable" class="list-unstyled ui-sortable task-list">
 

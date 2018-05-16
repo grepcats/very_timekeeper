@@ -12,7 +12,12 @@
 
 <script>
     $(function () {
-        $("#sortable").sortable();
+        $("#sortable").sortable({
+            update: function () {
+                resetTasks();
+            }
+        });
+
         $("#sortable").disableSelection();
     });
 </script>

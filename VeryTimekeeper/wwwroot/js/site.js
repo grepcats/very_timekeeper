@@ -22,37 +22,31 @@ function startTimer() {
         else {
             sec = seconds_left;
         }
-        console.log(hr + ":" + min + ":" + sec)
+        console.log(seconds_left)
         document.title = hr + ":" + min + ":" + sec;
        
         if (seconds_left <= 0) {
-            document.getElementById('timer' + task.taskId).innerHTML = 'task done';
             task.timeRemaining = 0;
-            //console.log(task.content);
-
-            //$('.start').click(function (event) {
-            //    event.preventDefault();
-
             $.ajax({
                 url: $(".start").attr('data-request-url'),
                 type: 'POST',
                 dataType: 'json',
-                data: { 'incomingId': task.taskId, 'incomingContent': task.content, 'incomingTimeRemaining': task.timeRemaining },
-                success: function (result) {
-                    $('#result').html("it worked");
-                }
+                data: { 'incomingId': task.taskId, 'incomingContent': task.content, 'incomingTimeRemaining': task.timeRemaining }
             });
-
-            //});
-           
+            setTimeout(resetTasks, 1000);
+            setTimeout(createFinishedTaskList, 2000);
+            setTimeout(startTimer, 3000);
             clearInterval(interval);
-            resetTasks();
-            startTimer();
-            
-        }
+        };
     }, 1000);
-    
+
+   
+
+    //createFinishedTaskList();
+    //startTimer();
 }
+
+
 
 function resetTasks() {
     var htmlTaskIds = $(".single-task").map(function () {
@@ -71,7 +65,11 @@ function resetTasks() {
         }
     });
 
-    createFinishedTaskList();
+    
+    console.log("resettasks run");
+    
+
+    
 }
 
 function createFinishedTaskList() {
@@ -84,4 +82,6 @@ function createFinishedTaskList() {
             $('#finished-tasks').html(result);
         }
     });
+
+    console.log("createfinishedtasklist run");
 }

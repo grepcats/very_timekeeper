@@ -24,30 +24,34 @@ function startTimer() {
         }
         console.log(hr + ":" + min + ":" + sec)
         document.title = hr + ":" + min + ":" + sec;
-
+       
         if (seconds_left <= 0) {
             document.getElementById('timer' + task.taskId).innerHTML = 'task done';
             task.timeRemaining = 0;
             //console.log(task.content);
-            $('.start').click(function (event) {
-                event.preventDefault();
-                console.log($(this).attr('data-request-url'));
-                
-                $.ajax({
-                    url: $(this).attr('data-request-url'),
-                    type: 'POST',
-                    dataType: 'json',
-                    data: { 'incomingId': task.taskId, 'incomingContent': task.content, 'incomingTimeRemaining': task.timeRemaining },
-                    success: function (result) {
-                        $('#result').html("it worked");
-                    }
-                });
 
+            //$('.start').click(function (event) {
+            //    event.preventDefault();
+
+            $.ajax({
+                url: $(".start").attr('data-request-url'),
+                type: 'POST',
+                dataType: 'json',
+                data: { 'incomingId': task.taskId, 'incomingContent': task.content, 'incomingTimeRemaining': task.timeRemaining },
+                success: function (result) {
+                    $('#result').html("it worked");
+                }
             });
 
+            //});
+           
             clearInterval(interval);
+            resetTasks();
+            startTimer();
+            
         }
     }, 1000);
+    
 }
 
 function resetTasks() {
@@ -62,8 +66,22 @@ function resetTasks() {
         dataType: 'html',
         data: { 'taskIds': htmlTaskIds },
         success: function (result) {
-            console.log(result);
+            //console.log(result);
             $('#all-tasks').html(result);
+        }
+    });
+
+    createFinishedTaskList();
+}
+
+function createFinishedTaskList() {
+    $.ajax({
+        url: $("#finished-tasks").attr('data-request-url'),
+        type: 'GET',
+        dataType: 'html',
+        success: function (result) {
+            //console.log(result);
+            $('#finished-tasks').html(result);
         }
     });
 }

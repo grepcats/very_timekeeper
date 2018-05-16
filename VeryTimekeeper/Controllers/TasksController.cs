@@ -62,7 +62,14 @@ namespace VeryTimekeeper.Controllers
                 
 
             }
-            List<Models.Task> model = _db.Tasks.OrderBy(x => x.timeToFinish).ToList();
+            List<Models.Task> model = _db.Tasks.Where(x => x.timeRemaining != 0).OrderBy(x => x.timeToFinish).ToList();
+            return PartialView(model);
+        }
+
+        public IActionResult ListFinishedTasks()
+        {
+            List<Models.Task> model = _db.Tasks.Where(x => x.timeRemaining == 0).OrderBy(x => x.timeToFinish).ToList();
+
             return PartialView(model);
         }
 
@@ -116,20 +123,8 @@ namespace VeryTimekeeper.Controllers
             thisTask.timeToFinish = DateTime.Now;
             _db.Entry(thisTask).State = EntityState.Modified;
             _db.SaveChanges();
-            
-            //List<Models.Task> model = _db.Tasks.ToList();
-            //if (model.Count > 0)
-            //{
-            //    Models.Task first = model[0];
-            //    model.RemoveAt(0);
-            //    model.Insert((model.Count), first);
-            //   // model.Insert(0, new Models.Task { Content = "hello guys", TaskId = 3, timeRemaining = 33 });
-            //}
 
-            List<Models.Task> model = _db.Tasks.OrderBy(x => x.timeToFinish).ToList();
-
-
-            return View("Index", model);
+            return RedirectToAction("Index");
         }
     }
 }

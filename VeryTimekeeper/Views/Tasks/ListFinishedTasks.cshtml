@@ -1,19 +1,7 @@
 ﻿@model IEnumerable<VeryTimekeeper.Models.Task>
 
-<script>
-    $(function () {
-        $("#sortable").sortable({
-            update: function () {
-                resetTasks();
-            }
-        });
-
-        $("#sortable").disableSelection();
-    });
-     var allTasks = @Html.Raw(Json.Serialize(Model));
-</script>
-
-<ul id="sortable" class="list-unstyled ui-sortable task-list">
+<h2>Finished Tasks</h2>
+<ul class="list-unstyled ui-sortable task-list">
 
     @foreach (var task in Model)
     {
@@ -25,5 +13,3 @@
 
     }
 </ul>
-
-

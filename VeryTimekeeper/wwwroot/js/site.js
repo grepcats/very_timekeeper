@@ -5,6 +5,7 @@ function startTimer() {
 
     let task = allTasks[0];
     let tasks = allTasks;
+    console.log(task);
     let seconds_left = task.timeRemaining;
     var interval = setInterval(function () {
         let min = 0;
@@ -27,11 +28,13 @@ function startTimer() {
             sec = seconds_left;
         }
         console.log(seconds_left)
-        document.title = hr + ":" + min + ":" + sec;
+        document.title = hr + ":" + min + ":" + sec + " - " + task.content;
        
         if (seconds_left <= 0) {
             task.timeRemaining = 0;
             console.log($(".start").attr('data-request-url'));
+            mySound = new sound("../sounds/chime.mp3")
+            mySound.play();
             $.ajax({
                 url: $(".start").attr('data-request-url'),
                 type: 'POST',
@@ -83,4 +86,19 @@ function createFinishedTaskList() {
     });
 
     console.log("createfinishedtasklist run");
+}
+
+function sound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.play = function () {
+        this.sound.play();
+    }
+    this.stop = function () {
+        this.sound.pause();
+    }
 }

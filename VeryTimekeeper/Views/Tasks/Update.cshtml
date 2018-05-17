@@ -3,7 +3,6 @@
 @using (Html.BeginForm("Update", "Tasks"))
 {
     @Html.HiddenFor(model => model.TaskId)
-    @Html.HiddenFor(model => model.Content)
     @Html.HiddenFor(model => model.timeToFinish)
     <div class="form-group">
         @Html.LabelFor(model => model.Content)

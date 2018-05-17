@@ -39,6 +39,12 @@ textarea {
     margin-top: 5px;
     border-radius: 15px;
     border: 1px solid red;
+    color: black;
+}
+
+.single-task a {
+    color: black;
+    text-decoration: none;
 }
 
 .task-list {

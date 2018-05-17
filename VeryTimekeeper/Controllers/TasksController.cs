@@ -42,9 +42,9 @@ namespace VeryTimekeeper.Controllers
             for (int i = 0; i < fullTaskIds.Count; i++)
             {
                 int newTaskId = Int32.Parse(fullTaskIds[i].Remove(0, 11));
-                
+
                 var thisTask = _db.Tasks.FirstOrDefault(Tasks => Tasks.TaskId == newTaskId);
-                
+
                 if (i == 0)
                 {
                     thisTask.timeToFinish = DateTime.Now.AddSeconds(thisTask.timeRemaining);
@@ -59,7 +59,7 @@ namespace VeryTimekeeper.Controllers
                     _db.Entry(thisTask).State = EntityState.Modified;
                     _db.SaveChanges();
                 }
-                
+
 
             }
             List<Models.Task> model = _db.Tasks.Where(x => x.timeRemaining != 0).OrderBy(x => x.timeToFinish).ToList();
@@ -108,7 +108,7 @@ namespace VeryTimekeeper.Controllers
                 sec = Int32.Parse(Request.Form["seconds"]);
             }
 
-        
+
             task.timeRemaining = (hr * 3600) + (min * 60) + sec;
             _db.Tasks.Add(task);
             await _db.SaveChangesAsync();
@@ -131,6 +131,15 @@ namespace VeryTimekeeper.Controllers
         {
             var thisTask = _db.Tasks.FirstOrDefault(Tasks => Tasks.TaskId == id);
             return View(thisTask);
+        }
+
+        [HttpPost]
+        public IActionResult Update(Models.Task task)
+        {
+            _db.Entry(task).State = EntityState.Modified;
+            _db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
     }
 }

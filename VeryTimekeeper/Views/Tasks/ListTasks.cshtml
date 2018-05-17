@@ -18,10 +18,11 @@
     @foreach (var task in Model)
     {
         <li class="single-task ui-state-default" id="single-task@(task.TaskId)">
-            <span class="task-title">@Html.DisplayFor(modelTask => task.Content)</span>
-            <span class="time-remaining" id="timer@(task.TaskId)">@Html.DisplayFor(modelTask => task.timeRemaining)</span>
-            <span class="time-complete">@Html.DisplayFor(modelTask => task.timeToFinish)</span>
-            <a href=@Url.Action("Update", "Tasks", new { id = task.TaskId })>Update</a>
+            <a href=@Url.Action("Update", "Tasks", new { id = task.TaskId })>
+                <span class="task-title">@Html.DisplayFor(modelTask => task.Content)</span>
+                <span class="time-remaining" id="timer@(task.TaskId)">@Html.DisplayFor(modelTask => task.timeRemaining)</span>
+                <span class="time-complete">@Html.DisplayFor(modelTask => task.timeToFinish)</span>
+            </a>
         </li>
 
     }

@@ -47,13 +47,24 @@ textarea {
     text-decoration: none;
 }
 
+.first-task .task-title,
+.first-task .time-remaining,
+.first-task .time-complete {
+    font-weight: bold;
+    
+}
+
+.first-task {
+    background-color: mediumpurple;
+    border: 1px solid purple;
+}
+
 .task-list {
     display: inline-block;
 
 }
 
 .task-title {
-    font-weight: bold;
     font-size: 1.25em;
 }
 

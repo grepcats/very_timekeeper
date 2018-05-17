@@ -15,18 +15,20 @@
 
 <ul id="sortable" class="list-unstyled ui-sortable task-list">
 
+    @{int i = 0;}
     @foreach (var task in Model)
     {
-        <li class="single-task ui-state-default" id="single-task@(task.TaskId)">
+
+        <li class="single-task ui-state-default @(i == 0 ? "first-task" : "")" id="single-task@(task.TaskId)">
             <a href=@Url.Action("Update", "Tasks", new { id = task.TaskId })>
                 <span class="task-title">@Html.DisplayFor(modelTask => task.Content)</span>
                 <span class="time-remaining" id="timer@(task.TaskId)">@Html.DisplayFor(modelTask => task.timeRemaining)</span>
                 <span class="time-complete">@Html.DisplayFor(modelTask => task.timeToFinish)</span>
             </a>
-                <a class="action" href=@Url.Action("Delete", "Tasks", new { id = task.TaskId })><span class="glyphicon glyphicon-remove" aria-label="delete task"></span></a>
-            
-        </li>
+            <a class="action" href=@Url.Action("Delete", "Tasks", new { id = task.TaskId })><span class="glyphicon glyphicon-remove" aria-label="delete task"></span></a>
 
+        </li>
+        i++;
     }
 </ul>
 

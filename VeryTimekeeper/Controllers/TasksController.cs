@@ -141,5 +141,20 @@ namespace VeryTimekeeper.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public IActionResult Delete(int id)
+        {
+            var thisTask = _db.Tasks.FirstOrDefault(Tasks => Tasks.TaskId == id);
+            return View(thisTask);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var thisTask = _db.Tasks.FirstOrDefault(Tasks => Tasks.TaskId == id);
+            _db.Tasks.Remove(thisTask);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }

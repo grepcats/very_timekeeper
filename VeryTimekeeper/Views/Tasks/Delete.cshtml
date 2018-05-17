@@ -1,0 +1,15 @@
+﻿@model VeryTimekeeper.Models.Task
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Are you sure you want to delete this?</h2>
+<hr />
+<div>
+    <p class="special">Task: @Html.DisplayFor(model => model.Content)</p>
+    @using (Html.BeginForm())
+    {
+        <button class="btn danger-button btn-lg" type="submit" value="Delete">Confirm Delete</button>
+    }
+</div>

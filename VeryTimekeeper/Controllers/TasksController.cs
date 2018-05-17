@@ -37,6 +37,12 @@ namespace VeryTimekeeper.Controllers
 
         public IActionResult ListTasks(string taskIds)
         {
+            List<Models.Task> model;
+            if (String.IsNullOrEmpty(taskIds)) {
+                model = _db.Tasks.Where(x => x.timeRemaining != 0).OrderBy(x => x.timeToFinish).ToList();
+                return PartialView(model);
+            };
+
             List<string> fullTaskIds = taskIds.Split(',').ToList();
             var lastTask = new Models.Task();
             for (int i = 0; i < fullTaskIds.Count; i++)
@@ -62,7 +68,7 @@ namespace VeryTimekeeper.Controllers
 
 
             }
-            List<Models.Task> model = _db.Tasks.Where(x => x.timeRemaining != 0).OrderBy(x => x.timeToFinish).ToList();
+            model = _db.Tasks.Where(x => x.timeRemaining != 0).OrderBy(x => x.timeToFinish).ToList();
             return PartialView(model);
         }
 

@@ -12,7 +12,8 @@ function startTimer() {
         let sec = 0;
         let hr = 0;
 
-        document.getElementById('timer' + task.taskId).innerHTML = --seconds_left;
+		--seconds_left;
+		
         if (seconds_left >= 3600) {
             hr = Math.floor(seconds_left / 3600)
             min = seconds_left % 60;
@@ -27,7 +28,8 @@ function startTimer() {
         else {
             sec = seconds_left;
         }
-        console.log(seconds_left)
+		console.log(seconds_left)
+		document.getElementById('timer' + task.taskId).innerHTML = hr + ":" + min + ":" + sec;
         document.title = hr + ":" + min + ":" + sec + " - " + task.content;
        
         if (seconds_left <= 0) {

@@ -1,4 +1,8 @@
 function startTimer() {
+    if (allTasks.length == 0) {
+        return;
+    }
+
     let task = allTasks[0];
     let tasks = allTasks;
     let seconds_left = task.timeRemaining;
@@ -27,6 +31,7 @@ function startTimer() {
        
         if (seconds_left <= 0) {
             task.timeRemaining = 0;
+            console.log($(".start").attr('data-request-url'));
             $.ajax({
                 url: $(".start").attr('data-request-url'),
                 type: 'POST',
@@ -40,10 +45,6 @@ function startTimer() {
         };
     }, 1000);
 
-   
-
-    //createFinishedTaskList();
-    //startTimer();
 }
 
 
@@ -67,9 +68,7 @@ function resetTasks() {
 
     
     console.log("resettasks run");
-    
-
-    
+ 
 }
 
 function createFinishedTaskList() {

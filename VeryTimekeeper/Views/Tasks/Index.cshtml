@@ -27,9 +27,9 @@
 </div>
 
 <hr />
-<button onclick="startTimer()" class="start" data-request-url="@Url.Action("UpdateTaskTime", "Tasks")">Click 2 start</button>
-<button class="reset" data-request-url="@Url.Action("ListTasks", "Tasks")" onclick="resetTasks()">Reset tasks</button>
-<button class="pause" data-request-url="@Url.Action("UpdateTaskTime", "Tasks")">Pause</button>
+<button onclick="startTimer()" class="start btn btn-success" data-request-url="@Url.Action("UpdateTaskTime", "Tasks")">Start</button>
+<button class="reset btn btn-default" data-request-url="@Url.Action("ListTasks", "Tasks")" onclick="resetTasks()">Reset tasks</button>
+<button class="pause btn btn-warning" data-request-url="@Url.Action("UpdateTaskTime", "Tasks")">Pause</button>
 
 
 

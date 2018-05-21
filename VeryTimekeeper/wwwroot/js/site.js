@@ -6,35 +6,41 @@ function startTimer() {
     let task = allTasks[0];
     let tasks = allTasks;
     console.log(task);
-    let seconds_left = task.timeRemaining;
     var interval = setInterval(function () {
         let min = 0;
         let sec = 0;
         let hr = 0;
 
-		--seconds_left;
+        --task.timeRemaining;
 		
-        if (seconds_left >= 3600) {
-            hr = Math.floor(seconds_left / 3600)
-            min = seconds_left % 60;
+        if (task.timeRemaining >= 3600) {
+            hr = Math.floor(task.timeRemaining / 3600)
+            min = task.timeRemaining % 60;
             if (min >= 60) {
-                min = Math.floor(seconds_left / 60);
-                sec = seconds_left % 60;
+                min = Math.floor(task.timeRemaining / 60);
+                sec = task.timeRemaining % 60;
             }
-        } else if (seconds_left >= 60) {
-            min = Math.floor(seconds_left / 60);
-            sec = seconds_left % 60;
+        } else if (task.timeRemaining >= 60) {
+            min = Math.floor(task.timeRemaining / 60);
+            sec = task.timeRemaining % 60;
         }
         else {
-            sec = seconds_left;
+            sec = task.timeRemaining;
         }
-		console.log(seconds_left)
+        console.log(task.timeRemaining)
 		document.getElementById('timer' + task.taskId).innerHTML = hr + ":" + min + ":" + sec;
         document.title = hr + ":" + min + ":" + sec + " - " + task.content;
+
+        $(".pause").click(function(event) {
+            event.preventDefault();
+            task.timeRemaining = task.timeRemaining;
+            pauseTimer(task);
+            clearInterval(interval);
+        })
        
-        if (seconds_left <= 0) {
+        if (task.timeRemaining <= 0) {
             task.timeRemaining = 0;
-            console.log($(".start").attr('data-request-url'));
+            //console.log($(".start").attr('data-request-url'));
             mySound = new sound("../sounds/chime.mp3")
             mySound.play();
             $.ajax({
@@ -103,4 +109,13 @@ function sound(src) {
     this.stop = function () {
         this.sound.pause();
     }
+}
+
+function pauseTimer(task) {
+    $.ajax({
+        url: $(".pause").attr('data-request-url'),
+        type: 'POST',
+        dataType: 'json',
+        data: { 'incomingId': task.taskId, 'incomingContent': task.content, 'incomingTimeRemaining': task.timeRemaining }
+    });
 }
